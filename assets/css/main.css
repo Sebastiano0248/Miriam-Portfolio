@@ -642,6 +642,33 @@ section,
   line-height: 0;
 }
 
+.language-item {
+  display: flex;
+  align-items: center; /* centra verticalmente los elementos */
+  flex-wrap: wrap; /* opcional, por si se desborda */
+  gap: 0.5rem;
+}
+
+.language-item strong {
+  min-width: 65px; /* ajusta este valor según el idioma más largo */
+}
+
+.level-container {
+  display: flex;
+  gap: 4px;
+}
+
+.level-square {
+  width: 12px;
+  height: 12px;
+  background-color: #ddd;
+  display: inline-block;
+}
+
+.level-square.filled {
+  background-color: #000;
+}
+
 /*--------------------------------------------------------------
 # Stats Section
 --------------------------------------------------------------*/
