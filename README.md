@@ -1,73 +1,78 @@
-## Miriam-Portfolio
+# Miriam Belmonte — Portfolio
 
-A clean, single-page portfolio website built from the "MyResume" HTML template by BootstrapMade. This repository contains the static site files (HTML, CSS, JS, images and vendor libraries) that power the portfolio.
+Single-page portfolio for graphic designer **Miriam Belmonte**, built with **React + Vite**.
 
-## About
+## Tech stack
 
-This project is a customizable portfolio/resume template that you can use to showcase skills, projects and contact information. It was generated from the free "MyResume" template (https://bootstrapmade.com/free-html-bootstrap-template-my-resume/).
+| Tool | Role |
+|---|---|
+| [Vite](https://vitejs.dev) | Build tool & dev server |
+| [React 18](https://react.dev) | UI framework |
+| [Bootstrap 5](https://getbootstrap.com) | CSS grid & utilities (npm, no vendor folder) |
+| [AOS](https://michalsnik.github.io/aos/) | Scroll animations |
+| [Typed.js](https://mattboldt.com/demos/typed-js/) | Hero typewriter effect |
+| [GLightbox](https://biati-digital.github.io/glightbox/) | Portfolio image lightbox |
 
-## Repository contents
+All interactive behaviours (scroll-spy, skill-bar animations, counter animations, portfolio filtering) are implemented with native React hooks and the browser's `IntersectionObserver` API — no jQuery, no Waypoints, no Isotope, no PureCounter.
 
-- `index.html` — main landing page for the portfolio
-- `portfolio-details.html`, `service-details.html`, `starter-page.html` — example detail pages
-- `assets/` — stylesheets, fonts, images, JavaScript and third-party vendor files
-  - `assets/css/main.css` — main stylesheet
-  - `assets/js/main.js` — primary JavaScript for interactive behaviors
-  - `assets/img/` — images used across the site
-  - `assets/vendor/` — third-party libraries (Bootstrap, AOS, Swiper, GLightbox, etc.)
-- `forms/` — simple contact form handler (`contact.php`) and related files
-- `Readme.txt` — original template attribution and license info
+## Project structure
 
-## Quick preview (how to run locally)
+```
+Miriam-Portfolio/
+├── public/
+│   └── assets/
+│       ├── fonts/          # Steneo-Regular.otf (custom brand font)
+│       └── img/            # All portfolio images
+│           └── masonry-portfolio/
+├── src/
+│   ├── App.jsx             # Root component — initialises AOS
+│   ├── App.css             # Global styles (adapted from original design)
+│   ├── main.jsx            # React entry point
+│   └── components/
+│       ├── Sidebar.jsx     # Fixed left nav with IntersectionObserver scroll-spy
+│       ├── Footer.jsx
+│       ├── ScrollTop.jsx
+│       └── sections/
+│           ├── Hero.jsx    # Background image + Typed.js
+│           ├── About.jsx   # Profile photo + language level squares
+│           ├── Stats.jsx   # Animated counters (custom hook)
+│           ├── Skills.jsx  # Progress bars animated on scroll
+│           ├── Resume.jsx  # Education & experience timeline
+│           ├── Portfolio.jsx # Filterable grid + GLightbox
+│           ├── Services.jsx
+│           └── Contact.jsx # Async form → getform.io
+├── additional data/
+│   └── CURRÍCULUM DISSENY GRÀFIC.pdf
+├── index.html
+├── package.json
+└── vite.config.js
+```
 
-1. Clone or download this repository to your machine.
-2. Open `index.html` in your browser (double-click or right-click -> Open with -> your browser).
+## Getting started
 
-Notes:
-- This is a static HTML site — no build step required. For a local web server experience (recommended for testing relative URLs), use a simple static server. For example, with Python 3 installed, run:
+```bash
+npm install
+npm run dev       # dev server at http://localhost:5173
+npm run build     # production build → dist/
+npm run preview   # preview the production build locally
+```
 
-  python -m http.server 8000
+## Deployment
 
-then open `http://localhost:8000` in your browser.
+The output of `npm run build` is a static site in `dist/` — deploy it to any static host:
 
-On Windows PowerShell you can run the command above as-is (in the repository root).
+- **GitHub Pages**: push `dist/` to the `gh-pages` branch, or use the [Vite GitHub Pages guide](https://vitejs.dev/guide/static-deploy.html#github-pages).
+- **Netlify / Vercel**: connect the repo, set build command to `npm run build` and publish directory to `dist`.
 
-## How to customize
+## Customising content
 
-- Edit the HTML pages (`index.html`, etc.) to change sections, text, and links.
-- Modify styles in `assets/css/main.css` or add new CSS under `assets/css/`.
-- Update JavaScript behavior in `assets/js/main.js` and vendor files under `assets/vendor/`.
-- Replace images in `assets/img/` with your own, keeping names or updating references in the HTML/CSS.
+All content is defined as plain JavaScript arrays/objects at the top of each component — no CMS or config file needed:
 
-If you plan a larger rewrite, consider extracting reusable components or moving assets into a build toolchain (Webpack, Vite, parcel, etc.).
+- **Skills** → [src/components/sections/Skills.jsx](src/components/sections/Skills.jsx)
+- **Resume** → [src/components/sections/Resume.jsx](src/components/sections/Resume.jsx)
+- **Portfolio items** → [src/components/sections/Portfolio.jsx](src/components/sections/Portfolio.jsx)
+- **Services** → [src/components/sections/Services.jsx](src/components/sections/Services.jsx)
+- **Contact info** → [src/components/sections/Contact.jsx](src/components/sections/Contact.jsx)
+- **Social links** → [src/components/sections/Hero.jsx](src/components/sections/Hero.jsx) and [src/components/Footer.jsx](src/components/Footer.jsx)
 
-## Deployment tips
-
-- For a static site, GitHub Pages, Netlify, Vercel, or any static host work well.
-- Ensure your hosting serves the repository root as the site root so relative paths to `assets/` stay correct.
-
-## License & attribution
-
-This project uses the free "MyResume" template by BootstrapMade. Original attribution and license information are included in `Readme.txt`. Please review the template license before republishing or reselling the template.
-
-## Credits
-
-- Template: BootstrapMade — MyResume (https://bootstrapmade.com)
-- Vendor libraries included in `assets/vendor/`: Bootstrap, AOS, GLightbox, Swiper, Isotope, Typed.js, and others (see `assets/vendor/` for exact files).
-
-## Troubleshooting
-
-- If styling appears broken, confirm `assets/css/main.css` and vendor CSS files are loaded and paths are correct.
-- If scripts fail, open the browser console for errors and ensure vendor JS files exist in `assets/vendor/`.
-
-## Contact / next steps
-
-If you'd like, I can:
-- convert this to a multi-page React/Vue site
-- set up an automated deploy to GitHub Pages or Netlify
-- add a simple build step or Sass compilation
-
-Open an issue or reply here with what you'd like done next.
-
----
-Template source and license details are preserved in the included `Readme.txt` provided with the original template.
+To change colours or fonts, edit the CSS custom properties at the top of [src/App.css](src/App.css).
