@@ -1,7 +1,7 @@
 # Dependabot (2026-10-30). Cada dilluns, com a molt una PR per tipus de paquet amb les
 # actualitzacions menors agrupades; les de seguretat també van agrupades, perquè pugui pujar alhora
 # paquets que depenen l'un de l'altre (p. ex. vite i @vitejs/plugin-react). pibot les revisa amb
-# Claude i les ensenya totes en un únic avís de GitHub.
+# Claude i les ensenya totes en un únic avís de GitHub. Els salts majors només arriben per seguretat.
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -12,6 +12,11 @@ updates:
       time: "06:00"
       timezone: "Europe/Madrid"
     open-pull-requests-limit: 5
+    ignore:
+      # Salts majors: només quan són de seguretat (Sebas, 2026-10-31). Aquesta regla només afecta
+      # les actualitzacions setmanals; les de seguretat no es filtren per tipus de versió.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       seguretat:
         applies-to: security-updates
@@ -29,6 +34,11 @@ updates:
       time: "06:00"
       timezone: "Europe/Madrid"
     open-pull-requests-limit: 5
+    ignore:
+      # Salts majors: només quan són de seguretat (Sebas, 2026-10-31). Aquesta regla només afecta
+      # les actualitzacions setmanals; les de seguretat no es filtren per tipus de versió.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       seguretat:
         applies-to: security-updates
