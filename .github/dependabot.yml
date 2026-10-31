@@ -1,0 +1,39 @@
+# Dependabot (2026-10-30). Cada dilluns, com a molt una PR per tipus de paquet amb les
+# actualitzacions menors agrupades; les de seguretat també van agrupades, perquè pugui pujar alhora
+# paquets que depenen l'un de l'altre (p. ex. vite i @vitejs/plugin-react). pibot les revisa amb
+# Claude i les ensenya totes en un únic avís de GitHub.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 5
+    groups:
+      seguretat:
+        applies-to: security-updates
+        patterns: ["*"]
+      menors:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 5
+    groups:
+      seguretat:
+        applies-to: security-updates
+        patterns: ["*"]
+      menors:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
