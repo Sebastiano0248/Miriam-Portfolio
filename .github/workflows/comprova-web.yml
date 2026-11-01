@@ -1,0 +1,45 @@
+# Comprova que la web compila i s'obre bé abans de fusionar (afegit per pibot, 2026-10-31).
+# pibot no fusiona una PR si aquesta comprovació falla, i Claude en revisa les captures.
+name: Comprova la web
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instal·la les dependències
+        run: npm ci
+
+      - name: Compila
+        run: npm run build
+
+      - name: Instal·la el navegador
+        run: npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
+
+      - name: Serveix la web compilada
+        run: npx vite preview --port 4173 --strictPort &
+
+      - name: Comprova la web
+        run: node .github/comprova-web.mjs "http://localhost:4173/Miriam-Portfolio/"
+
+      - name: Desa les captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: captures-web
+          path: captures/
+          retention-days: 7
